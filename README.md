@@ -5,6 +5,10 @@ A web application where people can post their ideas and get feed back from other
 - Ability to add a post
 - Ability to add a comment
 - Ability to view other posts
+- 
+
+
+
 ## Future plans:
 - Adding a groups like google+
 - Adding real-time review of posts

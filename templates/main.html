@@ -1,0 +1,59 @@
+<html>
+
+  <head>
+    <title>Express</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/foundation.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css')}}">
+  
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static',filename='js/foundation.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static',filename='js/modernizr.js')}}"></script>
+
+  </head>
+	<body>
+    <script>
+        $(document).ready(function() {
+          $(document).foundation();
+         })
+      </script>
+
+	   <nav class="top-bar" data-topbar role="navigation">
+      {% block menu %}
+      <ul class="title-area">
+          <li class="name" style="height: 100%"><h1><a class="mainname" style="margin-top: 10px; color: #2986d3; font-size: 30px; font-weight = bold" href="/">Express</a></h1></li>
+          <li class="toggle-topbar menu-icon"><a href="#"><span></span>Menu</a></li>
+      </ul>
+      <div>
+        <ul class="right ">
+          <li>
+            <a data-dropdown="id01" class="button signin" href="#">Sign in</a>
+            <ul id="id01" data-dropdown-content class="f-dropdown">
+              <li style="width: 100px"><a href="/authorize/facebook" style="background-color: #ffffff">Facebook</a></li><br>
+              <li style="width: 100px"><a href="/authorize/twitter">Twitter</a></li><br>
+              <li style="width: 100px"><a href="#">Google</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      {% endblock %}
+     </nav>
+     {% block content %}
+     <div class="content">
+
+        <div class="message-welcome">
+          <p class="white bold">Well, Hello <span>there</span></p>
+
+          <p style="color: #fcfcfc">Express is your platform , where you get to talk about things you care about and get constructive feedback from your friends! <br>
+              <span style="display: block; font-size: 25px; width: 100%; text-align: center; margin-top: 10px">Try it now!</span>
+          </p>
+        </div>
+
+    </div>
+    {% endblock %}
+	</body>
+</html>

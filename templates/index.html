@@ -1,0 +1,224 @@
+{% extends "main.html" %}
+
+{% block menu %}
+<div class="top-bar-left">
+  <ul class="title-area">
+      <li class="name" style="height: 100% margin-left: 20px; margin-top: 15px; padding-left: 20px;">
+        {% if current_user.is_authenticated %}
+            <span class="profile-name">{{ current_user.name }}</span>
+            {% if current_user.picture %}
+                <img class="profile-pic" src="{{ current_user.picture }}"/>
+            {% endif %}
+        {% endif %}
+        
+      </li>
+  </ul>
+</div>
+  <ul class="right">
+    <li style="float:left; padding-top: 5px;"><button type="button" data-reveal-id="post-dialog"
+     style="background-color: white;padding: 0px;color: #25a480; border: 1px solid #25a480; border-radius: 20px;width: 40px;height: 40px">+</button>
+   </li>
+   <div id="post-dialog" class="reveal-modal" data-reveal>
+     <a class="close-reveal-modal">&times;</a>
+     <div style="width: 100% height: 50px">
+      <h6>NEW POST</h6>
+      <form method="post" action="/posts/add/" enctype="multipart/form-data">
+        <input placeholder="Title..." type="text" name="title" id="tit" style="font-weight: bold; font-size: 19px; background-color: white;height: 60px;border: 0px; border-bottom: 2px solid #2986d3; font-family: 'Times New Roman', Times, serif;">
+        <input type="file" name="photo" id="photo">
+        <textarea rows="20" id="body" name="body" placeholder="What's on your mind?" style="background-color: white; min-width: 100%; max-height: 300px ; min-height: 300px; font-family: verdana; font-size: 15px; border: 0px;"></textarea>
+        <button class="radius small right" id="sendpost">Post</button>
+      </form>
+      
+     </div>
+   </div>
+
+    <div style="float:right; margin-left:30px;background-color: #25a480; height:97%;">
+      <li style="float:right; margin-right: 20px; padding-top: 10px;"><input type="submit" value="GO" style="border: 0px; border-radius: 15px; background-color: #015650; color: #fcfcfc; font-weight: bold"></li>
+      <li style="float:right; margin-right: 5px; margin-left: 40px; padding-top: 10px;"><input style="border: 1px solid #363636; border-radius: 15px;" type="search" name="query" placeholder="Search...."></li>
+    </div>
+  
+  </ul>
+{% endblock %}
+
+{% block content %}
+<script>
+$(document).ready(function() {
+    $(document).foundation();
+
+          $('.one-post').click(function(){
+
+              // called when we click on one post in th results
+
+              var id = $(this).attr("post-id");
+
+              var viewpostpost = $("#view-post-post");
+              var submitcomment = $("#submit-comment")
+
+
+              var image = viewpostpost.find("img.view-post-image")
+              var title = viewpostpost.find("span.view-post-title")
+              var body = viewpostpost.find("span.view-post-body")
+
+              $.ajax({
+                    type: "GET",
+                    url: "/posts/"+id,
+                    success: function(one,two,three){
+
+                      alert(one.comment);
+
+                      // to retreive when user sent comment on post
+                      submitcomment.attr('post_id',one.id)
+
+                      title.html(function(i,o){
+                        return one.title;
+                      });
+
+                      image.attr('src',one.picture);
+
+                      body.html(function(i,o){
+                        return one.body;
+                      });
+
+                    },
+                    dataType: "json"
+                  });
+
+
+
+              $('#view-post').foundation('reveal', 'open');
+
+          });
+
+
+
+          $('.comment').click(function(){
+              alert("clicked comment")
+          })
+
+
+
+
+          $('#submit-comment').click(function(){
+
+              var id = $(this).attr('post_id')
+              var comment = $('#user-comment').val();
+
+              $.ajax({
+                    type: "POST",
+                    url: "/comments/add/",
+                    data:{
+                      'post':id,
+                      'comment':comment
+                    },
+                    success:add_comment,
+                    dataType: "json"
+                  });
+
+          });
+
+
+          function add_comment(one,two,three){
+
+          author = JSON.parse(one.author);
+
+          
+
+           comment_section = $('#comments');
+
+           one_comment = "<div class=\"comment\"><img class=\"comment-photo\"src=\""+author.picture+"\">"+" "+"<span class=\"comment-name\">"+author.name+"</span><span class=\"comment-comment\">"+one.comment+"</span></div><hr>";
+            comment_section.append(one_comment);
+          }
+
+
+
+
+          $('#submit-reply').click(function(){
+              alert("clicked-send-reply")
+
+          })
+
+          $(function(){
+            $('form').on('submit',function(event){
+              $('#post-dialog').foundation('reveal', 'close');
+                 $.ajax({
+                    type: "POST",
+                    cache: false,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    data:{
+                        'title':$('#tit').val(),
+                        'body':$('#body').val(),
+                        'photo': event.target.photo
+                      },
+                    url: "/posts/add/",
+                    success: searchSuccess,
+                    dataType: "html"
+                  });
+
+              });
+            })
+          
+
+     function searchSuccess(data,textStatus,jqXHR){
+        
+     }
+
+})
+</script>
+  <div class="home-content">
+    <div class="posts">
+      <p class="home-content-title">
+        <small>All Expressions</small>
+      </p>
+      {% for post in posts %}
+        <div class="one-post" post-id="{{ post.id }}">
+          <img class="post-image" src="{{ post.picture }}"/>
+          <div class="post-content">
+              <span class="post-title">{{ post.title }}</span><br>
+              <span class="post-date">{{ post.date.strftime("%A %d/%m %H:%M") }}</span><br>
+              <span class="post-post">{{ post.body }}</span>
+          </div>
+      </div>
+
+      {% else %}
+      {% endfor %}
+    
+       <div id="view-post" class="reveal-modal xlarge" data-reveal>
+          <div id="view-post-post">
+            <span class="view-post-title"></span><br>
+            <img class="view-post-image" src="{{ url_for('static',filename='images/photo.jpg')}}"><br>
+            <span class="view-post-body"></span>
+          </div>
+            <div id="view-post-comment">
+              <span class="vpc-t">Comments</span>
+              <div id="comments">
+              </div>
+              <div class="add-comments">
+                <form>
+                  <input type="text" id="user-comment" name="reply">
+                </form>
+                <button id="submit-comment"><img src="{{ url_for('static',filename='images/send.png')}}"></button>
+              </div>
+            </div>
+            <div id="view-post-replies">
+              <span class="vpr-t">Replies</span>
+              <div id="replies">
+                <div class="reply">
+                  <img class="reply-photo"src="{{ url_for('static',filename='images/photo.jpg')}}">
+                  <span class="reply-name">Mb stapin</span>
+                  <span class="reply-reply"></span>
+                </div>
+                <hr>
+              </div>
+              <div class="add-replies">
+                <form>
+                  <input type="text" id="user-reply" name="reply">
+                </form>
+                <button id="submit-reply" ><img src="{{ url_for('static',filename='images/send.png')}}"></button>
+              </div>
+            </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

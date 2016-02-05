@@ -1,0 +1,309 @@
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+body{
+	background-color: #f2f2f2;
+}
+
+.top-bar {
+background-color: #ffffff;
+min-width:1000px;
+height: 70px;
+}
+.signin {
+	background-color: #fcfcfc; 
+	border: 2px solid #2986d3; 
+	color: #2986d3;
+	height: 50px;
+	border-radius: 20px;
+	margin-right: 20px;
+	margin-top: 10px;
+}
+.mainname {
+	color: #2986d3;
+}
+
+
+/* the main page styles */
+
+.content {
+	position: relative;
+	background-image: url("../images/back.jpg");
+	height: 100%;
+	margin-bottom: 50px;
+	width: 100%;
+}
+.message-welcome {
+	background-color: rgba(41, 134, 211, 0.5);
+	width:500px;
+	border: 2px solid #2986d3;
+	padding: 20px;
+	height: 200px;
+	border-radius: 10px;
+	position: relative;
+	top: 15%;
+	left: 5%;
+}
+.white {
+	color: white;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+/* the profile page*/
+
+.profile-pic {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	margin-top: 2px;
+	left: 20px;
+	border: 3px solid #dadada;
+	border-radius: 20px;
+}
+.profile-name{
+	padding-top: 4px;
+	padding-right: 7px;
+	left: 10px;
+	position: relative;
+	padding-bottom: 4px;
+	border-radius: 7px;
+	padding-left: 30px;
+	background-color: #f2f2f2;
+	color: #363636;
+	font-weight: bold;
+}
+
+/* main page content */
+.home-content{
+	padding: 0px;
+	background-color: #f2f2f2;
+	height: 100%;
+	width: 100%;
+}
+.posts {
+	padding: 2px;
+	height: 100%;
+	width: 800px;
+	min-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.home-content-title{
+	color: #363636;
+	font-size: 25px;
+	background-color: #ffffff;
+	padding-left: 20px;
+	padding-top: 10px;
+	height: 40px;
+}
+
+/*one post style */
+
+.one-post{
+	margin-top: 5px;
+	padding: 10px;
+	width: 100%; 
+	height: 180px;
+	background-color: white;
+	border: 1px solid #dadada;
+	border-radius: 2px;
+}
+.post-content{
+	width: 85%;
+	min-width: 85%;
+	float: left;
+}
+.post-title {
+	font-weight: bold;
+	font-size: 18px;
+	color: #363636;
+}
+.post-image {
+	width: 100px;
+	margin-right: 10px;
+	height: 100px;
+	float: left;
+	border-radius: 50px;
+	border: 3px solid #dadada;
+}
+.post-date{
+	color: #bdbdbd;
+	font-size: 12px;
+	font-family: Verdana;
+}
+.post-post {
+	margin-top: 5px;
+	display: inline-block;
+}
+
+
+/* the two models we have one for adding post
+	other for viewing post
+*/
+#view-post{
+	top: 10px;
+}
+#post-dialog {
+	top: 10px;
+}
+
+
+/* view in the view post model*/
+
+#view-post-post{
+	width: 40%;
+	float: left;
+	margin-right: 3%
+}
+
+.view-post-image{
+	border-radius: 1px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.view-post-title{
+	font-weight: bold;
+	font-size: 18px;
+	white-space: pr;
+	overflow: scroll;
+	color: #363636;
+	line-height: 19.6px;
+}
+#view-post-comment{
+	width: 27%;
+	float: left;
+	margin-right: 3%;
+	height: 450px;
+	border-radius: 2px;
+	border: 1px solid #f2f2f2;
+}
+#view-post-replies{
+	width: 27%;
+	float: right;
+	height: 450px;
+
+	border-radius: 2px;
+	border: 1px solid #f2f2f2;
+}
+
+.vpc-t{
+	width: 100%;
+	display: block;
+	text-align: center;
+	color: #484848;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: #E8F4FF;
+}
+.vpr-t{
+	width: 100%;
+	display: block;
+	text-align: center;
+	color: #484848;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: #E8F4FF;
+}
+#replies{
+	height: 390px;
+	overflow: scroll;
+
+}
+#comments{
+	height: 390px;
+	overflow: scroll;
+}
+.reply{
+	padding: 3px;
+}
+.reply-photo{
+	width: 30px;
+	margin-right: 5px;
+	margin-bottom: 3px;
+	height: 30px;
+	border-radius: 15px;
+	float: left;
+}
+.reply-name{
+	font-weight: bold;
+	font-size: 13px;
+	line-height: 13px;
+}
+.reply-reply{
+	font-size: 13px;
+	line-height: 14.5px;
+	font-family: Verdana;
+}
+.add-replies{
+	height: 50px;
+}
+#submit-reply{
+	margin-top: 3px;
+	margin-right: 3px;
+	background-color: white;
+	width: 30px;
+	height: 30px;
+	padding: 0px;
+	float: right;
+}
+
+#submit-comment img{
+	width: 30px;
+	height: 30px;
+}
+#user-reply{
+	float: left;
+	width: 85%;
+	border: 0px;
+}
+
+/*comment view styles*/
+
+.comment{
+	padding: 3px;
+}
+.comment-photo{
+	width: 30px;
+	margin-right: 5px;
+	margin-bottom: 3px;
+	height: 30px;
+	border-radius: 15px;
+	float: left;
+}
+.comment-name{
+	font-weight: bold;
+	font-size: 13px;
+	margin-right: 3px;
+	line-height: 13px;
+}
+.comment-comment{
+	font-size: 13px;
+	line-height: 14.5px;
+	font-family: Verdana;
+}
+.add-comments{
+	height: 50px;
+}
+#submit-comment{
+	margin-top: 3px;
+	margin-right: 3px;
+	background-color: white;
+	width: 30px;
+	height: 30px;
+	padding: 0px;
+	float: right;
+}
+
+#submit-comment img{
+	width: 30px;
+	height: 30px;
+}
+#user-comment{
+	float: left;
+	width: 85%;
+	border: 0px;
+}
